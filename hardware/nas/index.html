@@ -1,0 +1,499 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>NAS安装记录 | AI技术分享</title><meta name="author" content="大可"><meta name="copyright" content="大可"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="参考：  【硬件科普】NAS究竟是什么东西？你需要一台NAS吗？  最简单的黑群晖NAS安装方法（适合所有物理机和蜗牛星际），无需U盘引导，小白也能搞定  黑群DSM7.X引导文件  0元搭建NAS从入门到入坑     介绍了解NAS，准备组件一个家庭NAS 自己有一台旧的主机，还有几块多余的硬盘，正好可以用来搭建NAS。 使用黑群晖。 安装引导U盘引导用U盘做引导，后面U盘必须一直插在主机上，我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NAS安装记录">
+<meta property="og:url" content="https://dak.wang/hardware/nas/index.html">
+<meta property="og:site_name" content="AI技术分享">
+<meta property="og:description" content="参考：  【硬件科普】NAS究竟是什么东西？你需要一台NAS吗？  最简单的黑群晖NAS安装方法（适合所有物理机和蜗牛星际），无需U盘引导，小白也能搞定  黑群DSM7.X引导文件  0元搭建NAS从入门到入坑     介绍了解NAS，准备组件一个家庭NAS 自己有一台旧的主机，还有几块多余的硬盘，正好可以用来搭建NAS。 使用黑群晖。 安装引导U盘引导用U盘做引导，后面U盘必须一直插在主机上，我">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dak.wang/hardware/nas/cover.jpeg">
+<meta property="article:published_time" content="2023-09-06T03:45:39.000Z">
+<meta property="article:modified_time" content="2024-05-23T11:46:33.651Z">
+<meta property="article:author" content="大可">
+<meta property="article:tag" content="NAS">
+<meta property="article:tag" content="硬件">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dak.wang/hardware/nas/cover.jpeg"><link rel="shortcut icon" href="/assets/imgs/dak_icon.png"><link rel="canonical" href="https://dak.wang/hardware/nas/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 大可","link":"链接: ","source":"来源: AI技术分享","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'NAS安装记录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2024-05-23 19:46:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/assets/css/github-dark.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/imgs/dak_avatar_120.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-archive"></i><span> 归档</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url('/hardware/nas/cover.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="AI技术分享"><span class="site-name">AI技术分享</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-archive"></i><span> 归档</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">NAS安装记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-06T03:45:39.000Z" title="发表于 2023-09-06 11:45:39">2023-09-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-23T11:46:33.651Z" title="更新于 2024-05-23 19:46:33">2024-05-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A1%AC%E4%BB%B6/">硬件</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A1%AC%E4%BB%B6/NAS/">NAS</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="NAS安装记录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="note info flat"><p>参考：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kZ4y1F733">【硬件科普】NAS究竟是什么东西？你需要一台NAS吗？</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1N4411j72R">最简单的黑群晖NAS安装方法（适合所有物理机和蜗牛星际），无需U盘引导，小白也能搞定</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://wp.gxnas.com/11849.html">黑群DSM7.X引导文件</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EE411W7oa">0元搭建NAS从入门到入坑</a></p>
+</li>
+</ul>
+</div>
+
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>了解NAS，准备组件一个家庭NAS</p>
+<p>自己有一台旧的主机，还有几块多余的硬盘，正好可以用来搭建NAS。</p>
+<p>使用黑群晖。</p>
+<h1 id="安装引导"><a href="#安装引导" class="headerlink" title="安装引导"></a>安装引导</h1><h2 id="U盘引导"><a href="#U盘引导" class="headerlink" title="U盘引导"></a>U盘引导</h2><p>用U盘做引导，后面U盘必须一直插在主机上，我选择用<code>SSD(固态硬盘)</code>作引导。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://rufus.ie/en/">rufus写盘工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/fbelavenuto/arpl/releases">arpl巴西大佬群晖引导下载</a></li>
+</ul>
+<h2 id="SSD引导"><a href="#SSD引导" class="headerlink" title="SSD引导"></a>SSD引导</h2><p>不想一直插U盘，电脑有一块128G的SSD，用这块SSD做引导。</p>
+<ul>
+<li><p>准备一个U盘，安装PE，我使用的是 <a target="_blank" rel="noopener" href="https://www.wepe.com.cn/">微PE工具箱</a></p>
+</li>
+<li><p>安装到U盘后，把<code>引导文件</code>，<code>img写盘工具</code>复制到U盘，我使用的是<code> DS923_7.2-64570（引导文件）.img</code></p>
+<p>  开始使用的是 <code>ARPL</code> 引导，但好像和AMD不兼容，老是卡死，换成 <code>gxnas</code>制作的引导就正常了</p>
+<ul>
+<li><p><a href="IMG%E5%86%99%E7%9B%98%E5%B7%A5%E5%85%B7.exe">点击下载 img写盘工具</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://wp.gxnas.com/11849.html">黑群DSM7.X引导文件</a></p>
+</li>
+</ul>
+</li>
+<li><p>主机用PE启动，删除SSD的所有分区，用<code>img写盘工具</code> 写入SSD</p>
+</li>
+<li><p>重新用SSD启动，期间会重新启动一次</p>
+</li>
+<li><p>用另一台电脑或手机，在同一网络下 访问 <code>https://finds.synology.com/</code>，会自动搜索NAS设备，成功结果如下:</p>
+</li>
+</ul>
+<p><img src="/hardware/nas/success.png"></p>
+<h1 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h1><ul>
+<li><p>查看设备信息</p>
+<p>  <img src="/hardware/nas/info.png"></p>
+</li>
+<li><p>安装</p>
+<p>  <img src="/hardware/nas/install.png"></p>
+<p>  一直下一步，在这里不要自动安装，手动去下载中心下载 pat文件后上传</p>
+</li>
+<li><p>等待重启</p>
+<p>  <img src="/hardware/nas/wait.png" alt="等待10分钟左右"></p>
+</li>
+</ul>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="创建存储池和存储空间"><a href="#创建存储池和存储空间" class="headerlink" title="创建存储池和存储空间"></a>创建存储池和存储空间</h2><p>我电脑上只有一块 1T 的硬盘，多了机箱放不下，准备后面外接USB硬盘柜。</p>
+<p>Raid类别使用默认的SHR</p>
+<p><img src="/hardware/nas/%E5%AD%98%E5%82%A8%E6%B1%A0.png"></p>
+<h2 id="网络设置"><a href="#网络设置" class="headerlink" title="网络设置"></a>网络设置</h2><ul>
+<li><p>手动配置DNS服务器</p>
+<p>  首选DNS <code>8.8.8.8</code><br>  备选DNS <code>114.114.114.114</code></p>
+</li>
+<li><p>固定IP</p>
+<p>  不要使用DHCP，DHCP有可能会让路由器重新分配NAS的IP地址，导致你需要更换地址。这让你以后搭建好的设备都需要更改，很麻烦。所以建议将其固定。例如，如果你的NAS的IP地址是192.168.1.6，那么最后一位+10防止冲突，即6+10&#x3D;16；设置（固定）为192.168.1.16。记住最后一个数不能超过255。</p>
+<blockquote>
+<p>个人理解，就是访问5000端口 Web服务的 IP，设置在同一网段固定，方便访问</p>
+</blockquote>
+<p>  <img src="/hardware/nas/%E5%9B%BA%E5%AE%9AIP.png"></p>
+</li>
+<li><p>双路聚合</p>
+<p>  如果你有两个网口，那么可以设置双路聚合，点击新建，创建bond即可。</p>
+<p>  双路聚合的意思就是，你NAS有两个网线，那么就可以提高你的最大带宽，说白了就是提速。</p>
+</li>
+</ul>
+<h1 id="设置通知提醒"><a href="#设置通知提醒" class="headerlink" title="设置通知提醒"></a>设置通知提醒</h1><h2 id="邮件通知提醒"><a href="#邮件通知提醒" class="headerlink" title="邮件通知提醒"></a>邮件通知提醒</h2><p>通知设置-电子邮件</p>
+<p><img src="/hardware/nas/%E9%80%9A%E7%9F%A5%E9%82%AE%E7%AE%B1.png"></p>
+<p>用户名：QQ邮箱，可以与收信人的电子邮件地址一样（用作发邮件服务器）</p>
+<p>密码：此处密码为QQ邮箱客户端的授权码，并非QQ邮箱密码。</p>
+<p>勾选“向新用户发送欢迎信息”，以后新建用户时，邮箱地址为必填项。</p>
+<blockquote>
+<p>获取QQ邮箱客户端授权码的方法：<br>登录QQ邮箱——设置——帐户，然后往下翻，找到POP3&#x2F;IMAP&#x2F;SMTP</p>
+</blockquote>
+<h1 id="文件共享设置"><a href="#文件共享设置" class="headerlink" title="文件共享设置"></a>文件共享设置</h1><h2 id="文件服务"><a href="#文件服务" class="headerlink" title="文件服务"></a>文件服务</h2><p>文件服务，可以理解成，能让你去读取文件夹里面的东西，这就是文件服务提供给你的功能。</p>
+<p>选择高级设置，打开<code>启用文件快速克隆</code>，这是能节约硬盘空间的。</p>
+<ul>
+<li><p>SMB服务</p>
+<p>  <img src="/hardware/nas/SMB.png" alt="设置完成后，可以通过 \\DSM923 来访问共享文件"></p>
+</li>
+</ul>
+<h2 id="创建共享文件夹"><a href="#创建共享文件夹" class="headerlink" title="创建共享文件夹"></a>创建共享文件夹</h2><ul>
+<li><p>创建  </p>
+<p>  <img src="/hardware/nas/%E5%88%9B%E5%BB%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9.png"></p>
+<p>  权限设置先取消，后面设置</p>
+</li>
+<li><p>File Station</p>
+<p>  <img src="/hardware/nas/FileStation.png"></p>
+<p>  找到File Station，没有的话去套件中心下载。File Station的界面跟windows的界面差不多了，</p>
+<p>  大家应该会操作，常见的复制、粘贴、剪切什么的操作都支持。</p>
+<p>  每个文件夹里面都有一个叫‘recycle’的文件夹，这个就是每个文件夹对应的回收站。 </p>
+</li>
+<li><p>回收站清空计划</p>
+<p>  创建回收站清空计划。修改任务名称，不然任务一多，就乱了。同样不建议用中文。然后选择‘计划’，选择‘在以下日期运行’，重复时间，我这里选择每个月执行一次，小伙伴担心数据的可以选择更长的时间清理一次。然后选择‘任务计划’，选择‘清空所有的回收站’，保留策略选择第二个，我就默认选择7天了。</p>
+</li>
+</ul>
+<h2 id="设置群组"><a href="#设置群组" class="headerlink" title="设置群组"></a>设置群组</h2><p>这是用于管理用户，方便设置权限。这点很多玩NAS的小伙伴都不太注意，很容易导致自己的学习资料被父母看到。所以其重要性不言而喻。我这里分享我自己一套设置心得，也希望能帮到大家。首先我建议大家先设置群组，再设置个体。这样的话个体只需要贴上群组的标签就可以了。</p>
+<p>我建议群组设置6类：</p>
+<ol>
+<li>Powerful  </li>
+<li>Family </li>
+<li>Photo </li>
+<li>Video </li>
+<li>Music </li>
+<li>Drive</li>
+</ol>
+<p>1、Powerful 就是指权限，全开，拥有最高的执行权力</p>
+<p>2、Family 就是家人会用到的功能的权限</p>
+<p>3-6就分别是照片，影片，音乐，网盘的权限</p>
+<p>一般来说大家能看到3个系统默认的群组，建议大家就别去设置，还是用自己新建的比较好。</p>
+<h2 id="创建个体用户"><a href="#创建个体用户" class="headerlink" title="创建个体用户"></a>创建个体用户</h2><p>进入<code>用户账号-高级设置</code></p>
+<ul>
+<li>密码设置</li>
+<li>家目录<br>  这个一定要打开，将来服务于很多基础应用。</li>
+</ul>
+<p>创建个人的账号，分配好权限</p>
+<h1 id="套件中心"><a href="#套件中心" class="headerlink" title="套件中心"></a>套件中心</h1><h2 id="自动更新"><a href="#自动更新" class="headerlink" title="自动更新"></a>自动更新</h2><p>黑群晖也可以打开自动更新，没什么问题</p>
+<h2 id="新增套件来源"><a href="#新增套件来源" class="headerlink" title="新增套件来源"></a>新增套件来源</h2><p>可以安装第三方套件，功能丰富</p>
+<p><img src="/hardware/nas/%E5%A5%97%E4%BB%B6%E6%9D%A5%E6%BA%90.png"></p>
+<h2 id="VideoStation"><a href="#VideoStation" class="headerlink" title="VideoStation"></a>VideoStation</h2><p>电影、电视剧管理。</p>
+<ul>
+<li><p>安装 FFmpeg<br>  FFmpeg是Video Station播放的插件，让它支持更多的视频音频格式。</p>
+</li>
+<li><p>设置TMDB API秘钥<br>  打开软件后，会提示如何设置、先申请到API秘钥<br>  <code>c8cb450b763ec15eb8759616cca8b37a</code></p>
+</li>
+<li><p>设置host<br>  国内无法连接tmdb，被墙，要修改host来访问</p>
+  <div class="note warning flat"><p>我是移动网络，此方法对我无效，据说移动网络无效。</p>
+</div>
+
+<ul>
+<li><p>查看tmdp的ip<br>  访问<code>https://dnschecker.org/#A/api.themoviedb.org</code></p>
+<p>  找到国内的IP地址，以备在后面hosts文件中设置</p>
+<p>  <img src="/hardware/nas/dns.png"></p>
+</li>
+<li><p>终端机和SNMP</p>
+<p>  开启SSH服务</p>
+<p>  <img src="/hardware/nas/ssh.png"></p>
+</li>
+<li><p>连接</p>
+<p>  打开 电脑的<code>Windows Power Shell</code></p>
+<p>  输入命令 <code>ssh admin@192.168.1.100 -p 22</code>  </p>
+<p>  admin是设置的管理员账号,然后输入密码，进入后  <code>sudo -i</code>进入root权限</p>
+<p>  <code>vi /etc/hosts</code> 命令，修改hosts 文件，最后增加一行 <code> 13.224.161.90 api.themoviedb.org</code>，保存退出</p>
+</li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://dak.wang">大可</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://dak.wang/hardware/nas/">https://dak.wang/hardware/nas/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://dak.wang" target="_blank">AI技术分享</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/NAS/">NAS</a><a class="post-meta__tags" href="/tags/%E7%A1%AC%E4%BB%B6/">硬件</a></div><div class="post_share"></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/assets/imgs/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/assets/imgs/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/hardware/router/" title="给家里装一个软路由"><img class="cover" src="/hardware/router/cover.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">给家里装一个软路由</div></div></a></div><div class="next-post pull-right"><a href="/ai/stablediffusion/5/" title="Stable Diffusion - (五)高清修复与后期处理"><img class="cover" src="/ai/stablediffusion/5/%E5%90%8E%E6%9C%9F%E5%A4%84%E7%90%86.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Stable Diffusion - (五)高清修复与后期处理</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/hardware/router/" title="给家里装一个软路由"><img class="cover" src="/hardware/router/cover.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-12</div><div class="title">给家里装一个软路由</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/imgs/dak_avatar_120.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">大可</div><div class="author-info__description">AI技术分享，记录学习之旅的点点滴滴。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客，若喜欢请收藏 ^_^</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%BC%95%E5%AF%BC"><span class="toc-number">2.</span> <span class="toc-text">安装引导</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#U%E7%9B%98%E5%BC%95%E5%AF%BC"><span class="toc-number">2.1.</span> <span class="toc-text">U盘引导</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSD%E5%BC%95%E5%AF%BC"><span class="toc-number">2.2.</span> <span class="toc-text">SSD引导</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85"><span class="toc-number">3.</span> <span class="toc-text">系统安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AD%98%E5%82%A8%E6%B1%A0%E5%92%8C%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4"><span class="toc-number">4.1.</span> <span class="toc-text">创建存储池和存储空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.2.</span> <span class="toc-text">网络设置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E9%80%9A%E7%9F%A5%E6%8F%90%E9%86%92"><span class="toc-number">5.</span> <span class="toc-text">设置通知提醒</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5%E6%8F%90%E9%86%92"><span class="toc-number">5.1.</span> <span class="toc-text">邮件通知提醒</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E8%AE%BE%E7%BD%AE"><span class="toc-number">6.</span> <span class="toc-text">文件共享设置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1"><span class="toc-number">6.1.</span> <span class="toc-text">文件服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">6.2.</span> <span class="toc-text">创建共享文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E7%BE%A4%E7%BB%84"><span class="toc-number">6.3.</span> <span class="toc-text">设置群组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BD%93%E7%94%A8%E6%88%B7"><span class="toc-number">6.4.</span> <span class="toc-text">创建个体用户</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A5%97%E4%BB%B6%E4%B8%AD%E5%BF%83"><span class="toc-number">7.</span> <span class="toc-text">套件中心</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0"><span class="toc-number">7.1.</span> <span class="toc-text">自动更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E5%A5%97%E4%BB%B6%E6%9D%A5%E6%BA%90"><span class="toc-number">7.2.</span> <span class="toc-text">新增套件来源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VideoStation"><span class="toc-number">7.3.</span> <span class="toc-text">VideoStation</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/hardware/router/" title="给家里装一个软路由"><img src="/hardware/router/cover.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="给家里装一个软路由"/></a><div class="content"><a class="title" href="/hardware/router/" title="给家里装一个软路由">给家里装一个软路由</a><time datetime="2023-09-12T03:45:39.000Z" title="发表于 2023-09-12 11:45:39">2023-09-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/hardware/nas/" title="NAS安装记录"><img src="/hardware/nas/cover.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NAS安装记录"/></a><div class="content"><a class="title" href="/hardware/nas/" title="NAS安装记录">NAS安装记录</a><time datetime="2023-09-06T03:45:39.000Z" title="发表于 2023-09-06 11:45:39">2023-09-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/ai/stablediffusion/5/" title="Stable Diffusion - (五)高清修复与后期处理"><img src="/ai/stablediffusion/5/%E5%90%8E%E6%9C%9F%E5%A4%84%E7%90%86.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Stable Diffusion - (五)高清修复与后期处理"/></a><div class="content"><a class="title" href="/ai/stablediffusion/5/" title="Stable Diffusion - (五)高清修复与后期处理">Stable Diffusion - (五)高清修复与后期处理</a><time datetime="2023-08-28T07:30:17.000Z" title="发表于 2023-08-28 15:30:17">2023-08-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/ai/stablediffusion/4/" title="Stable Diffusion - (四)图生图入门"><img src="/ai/stablediffusion/4/cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Stable Diffusion - (四)图生图入门"/></a><div class="content"><a class="title" href="/ai/stablediffusion/4/" title="Stable Diffusion - (四)图生图入门">Stable Diffusion - (四)图生图入门</a><time datetime="2023-08-24T07:30:17.000Z" title="发表于 2023-08-24 15:30:17">2023-08-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/ai/stablediffusion/3/" title="Stable Diffusion - (三)文生图入门与参数设置"><img src="/ai/stablediffusion/3/cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Stable Diffusion - (三)文生图入门与参数设置"/></a><div class="content"><a class="title" href="/ai/stablediffusion/3/" title="Stable Diffusion - (三)文生图入门与参数设置">Stable Diffusion - (三)文生图入门与参数设置</a><time datetime="2023-08-24T04:30:17.000Z" title="发表于 2023-08-24 12:30:17">2023-08-24</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/hardware/nas/cover.jpeg')"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2024 By 大可</div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备2024247414号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.dak.wang',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, {"reaction":["http://unpkg.com/@waline/emojis/tieba/tieba_agree.png","http://unpkg.com/@waline/emojis/tieba/tieba_look_down.png"],"dark":false,"meta":["nick","mail"],"copyright":false}))
+  }
+
+  if (typeof Waline === 'object') initWaline()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css').then(() => {
+      getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !false) {
+  if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script>window.addEventListener('load', () => {
+  const changeContent = content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = async () => {
+    try {
+      const res = await fetch('https://waline.dak.wang/api/comment?type=recent&count=6', { method: 'GET' })
+      const result = await res.json()
+      const walineArray = result.data.map(e => {
+        return {
+          'content': changeContent(e.comment),
+          'avatar': e.avatar,
+          'nick': e.nick,
+          'url': e.url + '#' + e.objectId,
+          'date': e.time || e.insertedAt
+        }
+      })
+      saveToLocal.set('waline-newest-comments', JSON.stringify(walineArray), 10/(60*24))
+      generateHtml(walineArray)
+    } catch (err) {
+      console.error(err)
+      const $dom = document.querySelector('#card-newest-comments .aside-list')
+      $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+    }
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('waline-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="26467411" data-server="netease" data-type="playlist" data-autoplay="true" data-order="random" data-fixed="true"> </div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="150" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
